@@ -1,6 +1,11 @@
 const fs = require("fs");
+const path = require("path");
+const Employee = require("../lib/Employee");
+const Manager = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
+const Intern = require("../lib/Intern");
 
-managerCard = (member) => {
+const managerCard = (member) => {
   const manager = `<div class="card col-3 m-3">
   <div class="card-header bg-info">
     <h3>${member.getRole()}</h3>
@@ -14,7 +19,7 @@ managerCard = (member) => {
 </div>`;
   return manager;
 };
-engineerCard = (member) => {
+const engineerCard = (member) => {
   const engineer = `<div class="card col-3 m-3">
   <div class="card-header bg-info">
     <h3>${member.getRole()}</h3>
@@ -23,12 +28,12 @@ engineerCard = (member) => {
     <li class="list-group-item">Name: ${member.getName()}</li>
     <li class="list-group-item">ID: ${member.getId()}</li>
     <li class="list-group-item">Email: ${member.getEmail()}</li>
-    <li class="list-group-item">GitHub Username: ${member.getGithub()}</li>
+    <li class="list-group-item">GitHub Username: ${member.getGitHub()}</li>
   </ul>
-</div>`;
+  </div>`;
   return engineer;
 };
-internCard = (member) => {
+const internCard = (member) => {
   const intern = `<div class="card col-3 m-3">
   <div class="card-header bg-info">
     <h3>${member.getRole()}</h3>
@@ -44,6 +49,7 @@ internCard = (member) => {
 };
 
 const writer = (team) => {
+  console.log(team);
   let employeeCards = "";
   team.forEach((member) => {
     switch (member.getRole()) {
@@ -61,54 +67,54 @@ const writer = (team) => {
     }
   });
   const htmlText = `
-  <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <header class="container-fluid bg-success p-5">
-      <h1 class="text-center p-3 text-info fs-1 fw-bold">Project Team</h1>
-    </header>
-    <main class="container row">
-      ${employeeCards}
-      </div>
-    </main>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-      integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+      <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Team SuperCrew</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+          crossorigin="anonymous"
+        />
+       <script
+         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+         crossorigin="anonymous"
+        ></script>
+      </head>
+      <body>
+        <header class="container-fluid bg-success p-5">
+          <h1 class="text-center p-3 text-info fs-1 fw-bold">Project Team</h1>
+        </header>
+        <main class="container row">
+          ${employeeCards}
+        </main>
+        <script
+          src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+         crossorigin="anonymous"
+        ></script>
+        <script
+         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+          integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+         crossorigin="anonymous"
+        ></script>
+      </body>
+    </html>
   `;
+  return htmlText;
 };
 
-// console.log(writer(team));
-
-fileExport = (team) => {
-  fs.writeFile("./index.html", writer(team), (err) => {
-    err ? console.log(err) : console.log("Generating");
-  });
+const fileExport = (fileName, data) => {
+  return fs.writeFile(path.join(__dirname + "./dist", fileName), data, (err) =>
+    err ? console.error(err) : console.log("Success!")
+  );
 };
 
-fileExport(team);
+// fileExport("index.html", writer());
+
+module.exports = writer;

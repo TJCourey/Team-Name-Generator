@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
+const writer = require("./src/write");
 const team = [];
 const managerQuestions = [
   {
@@ -125,8 +126,14 @@ internInput = () => {
     })
     .catch((err) => console.log(err));
 };
+const fileExport = (fileName, data) => {
+  return fs.writeFile(path.join(__dirname + "/dist", fileName), data, (err) =>
+    err ? console.error(err) : console.log("Success!")
+  );
+};
 printHtml = (data) => {
   console.log(data);
+  fileExport("index.html", writer(data));
 };
 
 listTeam = () => {
