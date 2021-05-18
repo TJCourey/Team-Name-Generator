@@ -132,7 +132,7 @@ const fileExport = (fileName, data) => {
   );
 };
 printHtml = (data) => {
-  console.log(data);
+  // console.log(data);
   fileExport("index.html", writer(data));
 };
 

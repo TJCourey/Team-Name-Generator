@@ -13,7 +13,7 @@ const managerCard = (member) => {
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Name: ${member.getName()}</li>
     <li class="list-group-item">ID: ${member.getId()}</li>
-    <li class="list-group-item">Email: ${member.getEmail()}</li>
+    <li class="list-group-item">Email: <a href = "mailto: ${member.getEmail()}">${member.getEmail()}</a></li>
     <li class="list-group-item">Office Number: ${member.getPhone()}</li>
   </ul>
 </div>`;
@@ -27,8 +27,8 @@ const engineerCard = (member) => {
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Name: ${member.getName()}</li>
     <li class="list-group-item">ID: ${member.getId()}</li>
-    <li class="list-group-item">Email: ${member.getEmail()}</li>
-    <li class="list-group-item">GitHub Username: ${member.getGitHub()}</li>
+    <li class="list-group-item">Email: <a href = "mailto: ${member.getEmail()}">${member.getEmail()}</a></li>
+    <li class="list-group-item">GitHub Username: <a href="https://github.com/${member.getGitHub()}">${member.getGitHub()}</a></li>
   </ul>
   </div>`;
   return engineer;
@@ -41,7 +41,7 @@ const internCard = (member) => {
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Name: ${member.getName()}</li>
     <li class="list-group-item">ID: ${member.getId()}</li>
-    <li class="list-group-item">Email: ${member.getEmail()}</li>
+    <li class="list-group-item">Email: <a href = "mailto: ${member.getEmail()}">${member.getEmail()}</a></li>
     <li class="list-group-item">School: ${member.getSchool()}</li>
   </ul>
 </div>`;
